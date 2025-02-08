@@ -2,7 +2,9 @@
 
 This repository contains basic security concepts that should be applied in order to keep dockerized applications safe and secure.
 
-## Persistence and Mounting:
+‎
+
+## I-Persistence and Mounting:
 
 This script outputs the command "Ran!" once every time it is called. It does not save any data: ```docker run python:3.12-alpine python -c 'f="/data.txt";open(f, "a").write(f"Ran!\n");print(open(f).read())'```
 - Output when called once: ```Ran!```
@@ -19,22 +21,21 @@ Ran!
 Ran!
 Ran!
 ```
-
 ### Mount Types:
 - Volumes (used for persistence)
 - Bind-mounts (used for persistence)
 - Tempfs mounts (NOT used for persistence)
 
----
+‎
 
-## Docker Layers: Security Warning
+## II-Docker Layers: Security Warning
 - **```DELETE``` creates new layers:** A run command that deletes something does not modify the previous layer; it creates a new layer on top of it. That means that **it's not safe to put any sensitive information in docker images... even if you delete that information in a later command**
 - **Deleted data can be recovered by users:** Layers act similarly to git history; creating a new commit will not stop a malicious user from pulling data out from previous commits
 
----
+‎
 
-## Multistage Builds
-security + decrease image size
+## III-Multistage Builds
+> Purpose: Increased security + decreased image size
 
 ```
 FROM python:3.12-slim
@@ -76,9 +77,9 @@ EXPOSE 8000
 CMD ["uvicorn", "mysite.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
----
+‎
 
-## Docker Compose
+## IV-Docker Compose
 Since Dockerfiles are meant for separate components, managing each container individually may be heavy and time-consuming.
 For certain compositions, we use a higher-level tool called Docker Compose. Refer to ```docker-compose.yml```.
 
@@ -88,7 +89,7 @@ services:
     ...
     
   backend:
-     ...
+    ...
 ```
 
 When all the images are built in the yml file, we can start everything all at once by running the command ```docker compose up```.

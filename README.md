@@ -1,4 +1,4 @@
-# Security Concepts in Docker
+# Security & Memory Concepts in Docker
 
 This repository contains basic security concepts that should be applied in order to keep dockerized applications safe and secure.
 
